@@ -9,17 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/v1/products")
+@RestController
+@RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    @PostMapping("/save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> saveProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.saveProduct(product));
-    }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
@@ -27,7 +22,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProducts());
     }
 
-    @GetMapping("/{productId}")
+    @GetMapping("/{category}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("category") String category) {
+        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    }
+
+    @GetMapping("/id/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Product> getProductById(@PathVariable("productId") String productId) {
         return ResponseEntity.of(productService.getProductsById(productId));

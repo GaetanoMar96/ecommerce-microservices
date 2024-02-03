@@ -1,11 +1,13 @@
 package com.microservice.productservice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document("product")
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -13,7 +15,11 @@ public class Product {
 
     private String name;
 
-    private String type;
+    private String category;
 
-    private Double cost;
+    private String description;
+
+    private Double price;
+
+    private String imageUrl;
 }
