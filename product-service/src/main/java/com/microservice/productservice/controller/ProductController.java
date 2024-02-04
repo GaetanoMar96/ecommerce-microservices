@@ -16,7 +16,7 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping()
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok(productService.getProducts());
