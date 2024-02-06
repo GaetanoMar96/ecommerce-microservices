@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Document("product")
 @AllArgsConstructor
@@ -17,9 +19,17 @@ public class Product {
 
     private String category;
 
+    private String brand;
+
     private String description;
 
     private Double price;
 
-    private String imageUrl;
+    private List<Image> images;
+
+    @Data
+    public static class Image {
+        private String image;
+        private String color;
+    }
 }

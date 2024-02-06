@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class ProductControllerTest {
 
     @Test
     public void testGetProducts() throws Exception {
-        List<Product> products = List.of(new Product("objectId", "Footwear", "Shoes", "Running shoes", 100.0, "image.jpg"));
+        List<Product> products = List.of(new Product("objectId", "Footwear", "Shoes", "Nike","Running shoes", 100.0, Collections.singletonList(new Product.Image())));
         when(productService.getProducts()).thenReturn(products);
 
         mockMvc.perform(get("/api/v1/products"))
@@ -40,7 +41,7 @@ public class ProductControllerTest {
 
     @Test
     public void testGetProductsByCategory() throws Exception {
-        List<Product> products = List.of(new Product("objectId", "Footwear", "Shoes", "Running shoes", 100.0, "image.jpg"));
+        List<Product> products = List.of(new Product("objectId", "Footwear", "Shoes", "Nike", "Running shoes", 100.0, Collections.singletonList(new Product.Image())));
         when(productService.getProductsByCategory("Shoes")).thenReturn(products);
 
         mockMvc.perform(get("/api/v1/products/Shoes"))
@@ -51,7 +52,7 @@ public class ProductControllerTest {
 
     @Test
     public void testGetProductById() throws Exception {
-        Product product = new Product("objectId", "Footwear", "Shoes", "Running shoes", 100.0, "image.jpg");
+        Product product = new Product("objectId", "Footwear", "Shoes", "Nike","Running shoes", 100.0, Collections.singletonList(new Product.Image()));
         when(productService.getProductsById("objectId")).thenReturn(Optional.of(product));
 
         mockMvc.perform(get("/api/v1/products/id/objectId"))
